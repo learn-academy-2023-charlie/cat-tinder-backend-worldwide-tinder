@@ -8,7 +8,13 @@ class CountriesController < ApplicationController
     def create
     # Create a new country
         country = Country.create(country_params)
-        render json: country    
+        
+        if country.valid?
+            render json: country
+        else
+            render json: country.errors, status: 422
+        end
+
     end
 
     
